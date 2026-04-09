@@ -12,9 +12,10 @@ int main() {
     float pib1;
     int pontos_turisticos1;
     
-    // Novas propriedades calculadas (Nível Aventureiro)
+    // Novas propriedades calculadas (Nível Aventureiro e Mestre)
     float densidade1;
     float pib_capita1;
+    float super_poder1;
 
     // =======================================================
     // VARIÁVEIS DA CARTA 2
@@ -27,9 +28,10 @@ int main() {
     float pib2;
     int pontos_turisticos2;
     
-    // Novas propriedades calculadas (Nível Aventureiro)
+    // Novas propriedades calculadas (Nível Aventureiro e Mestre)
     float densidade2;
     float pib_capita2;
+    float super_poder2;
 
     // =======================================================
     // ENTRADA DE DADOS: CARTA 1
@@ -59,8 +61,9 @@ int main() {
 
     // Cálculos da Carta 1
     densidade1 = (float) populacao1 / area1;
-    // Multiplicamos o PIB por 1 bilhão (1000000000.0) para obter o valor real em reais antes de dividir
     pib_capita1 = (pib1 * 1000000000.0f) / (float) populacao1;
+    // Super Poder: soma de todos os atributos numéricos. Note o uso de conversão de tipo (casting) e o inverso da densidade.
+    super_poder1 = (float) populacao1 + area1 + pib1 + (float) pontos_turisticos1 + pib_capita1 + (1.0f / densidade1);
 
     // =======================================================
     // ENTRADA DE DADOS: CARTA 2
@@ -91,6 +94,8 @@ int main() {
     // Cálculos da Carta 2
     densidade2 = (float) populacao2 / area2;
     pib_capita2 = (pib2 * 1000000000.0f) / (float) populacao2;
+    // Super Poder: soma de todos os atributos numéricos.
+    super_poder2 = (float) populacao2 + area2 + pib2 + (float) pontos_turisticos2 + pib_capita2 + (1.0f / densidade2);
 
     // =======================================================
     // EXIBIÇÃO DOS DADOS (SAÍDA FORMATADA)
@@ -108,6 +113,7 @@ int main() {
     printf("Numero de Pontos Turisticos: %d\n", pontos_turisticos1);
     printf("Densidade Populacional: %.2f hab/km²\n", densidade1);
     printf("PIB per Capita: %.2f reais\n", pib_capita1);
+    printf("Super Poder: %.2f\n", super_poder1);
 
     printf("\n-----------------------------------------\n\n");
 
@@ -122,6 +128,31 @@ int main() {
     printf("Numero de Pontos Turisticos: %d\n", pontos_turisticos2);
     printf("Densidade Populacional: %.2f hab/km²\n", densidade2);
     printf("PIB per Capita: %.2f reais\n", pib_capita2);
+    printf("Super Poder: %.2f\n", super_poder2);
+
+    // =======================================================
+    // COMPARAÇÃO DAS CARTAS (BATALHA SUPER TRUNFO)
+    // =======================================================
+    printf("\n=========================================\n");
+    printf("Comparacao de Cartas:\n");
+
+    // Usando operadores relacionais. O resultado será 1 (verdadeiro, Carta 1 venceu) ou 0 (falso, Carta 2 venceu).
+    int vence_populacao = populacao1 > populacao2;
+    int vence_area = area1 > area2;
+    int vence_pib = pib1 > pib2;
+    int vence_pontos = pontos_turisticos1 > pontos_turisticos2;
+    int vence_densidade = densidade1 < densidade2; // Atenção: Para densidade, o MENOR valor vence!
+    int vence_pib_capita = pib_capita1 > pib_capita2;
+    int vence_super = super_poder1 > super_poder2;
+
+    // A expressão (variavel ? 1 : 2) checa se a variável é verdadeira (1). Se for, imprime 1 (Carta 1), senão imprime 2 (Carta 2).
+    printf("Populacao: Carta %d venceu (%d)\n", vence_populacao ? 1 : 2, vence_populacao);
+    printf("Area: Carta %d venceu (%d)\n", vence_area ? 1 : 2, vence_area);
+    printf("PIB: Carta %d venceu (%d)\n", vence_pib ? 1 : 2, vence_pib);
+    printf("Pontos Turisticos: Carta %d venceu (%d)\n", vence_pontos ? 1 : 2, vence_pontos);
+    printf("Densidade Populacional: Carta %d venceu (%d)\n", vence_densidade ? 1 : 2, vence_densidade);
+    printf("PIB per Capita: Carta %d venceu (%d)\n", vence_pib_capita ? 1 : 2, vence_pib_capita);
+    printf("Super Poder: Carta %d venceu (%d)\n", vence_super ? 1 : 2, vence_super);
 
     return 0;
 }
